@@ -9,6 +9,12 @@
   - [瀏覽器連線](#瀏覽器連線)
   - [連線設定](#連線設定)
 - [docker與docker-compose安裝](#docker與docker-compose安裝)
+- [自建docker gitlab](#自建docker-gitlab)
+  - [clone專案](#clone專案)
+  - [啟動服務](#啟動服務)
+  - [修改域名](#修改域名)
+  - [首次登入與新增使用者](#首次登入與新增使用者)
+
 
 ## gcp 創建 instance 操作範例
 
@@ -159,4 +165,51 @@ IP預設是```隨機分配```的，```重新開機後依然會隨機分配一個
   ```最後退出gcp重新登入確認docker是否安裝成功```
 
 ------------------
+## 自建docker gitlab
+
+  ### clone專案
+  
+  ```bash
+  git clone https://github.com/JackViewLand/docker_gitlab.git
+  ```
+  ### 啟動服務 
+  ```bash
+  docker-compose up -d 
+  ```
+  
+  ### 修改域名
+  ```bash
+  sudo vi config/gitlab.rb
+  ```
+  <img width="688" alt="ggitlab" src="https://github.com/JackViewLand/docker_gitlab/assets/122655131/80ee1ce2-ab11-4758-ba93-49cdbbea74b5">
+  
+  重新啟動
+  
+  ```bash
+  docker-compose down -v && docker-compose up -d 
+  ```
+  ### 首次登入與新增使用者
+  
+  <img width="1000" alt="login" src="https://github.com/JackViewLand/docker_gitlab/assets/122655131/a2f7ecda-150e-4bf4-9c44-054a15914f03">
+  
+  第一次登入root密碼存放在```config/initial_root_password```
+  
+  ```bash
+  sudo cat config/initial_root_password
+  ```
+  
+  <img width="577" alt="截圖 2024-01-20 下午2 24 51" src="https://github.com/JackViewLand/docker_gitlab/assets/122655131/9c18ee39-2fce-42f2-8004-d044a66f5327">
+  
+  登入成功後請先修改root密碼
+  
+  <img width="258" alt="修改root密碼" src="https://github.com/JackViewLand/docker_gitlab/assets/122655131/f5095feb-785f-46e1-b904-ff8d13b476fe">
+  <img width="993" alt="截圖 2024-01-20 下午2 30 42" src="https://github.com/JackViewLand/docker_gitlab/assets/122655131/169f90d8-c029-4eb9-a43a-b4e26c812053">
+
+  新增normal user
+  
+  <img width="300" alt="新增normal_user" src="https://github.com/JackViewLand/docker_gitlab/assets/122655131/55ab2de4-0455-462d-94ec-9b78129c5c61">
+
+  <img width="257" alt="user" src="https://github.com/JackViewLand/docker_gitlab/assets/122655131/cf5a4b04-b8f9-4837-9119-70085d69e985">
+
+  # 恭喜你成功搭建私有的gitlab囉！
 
